@@ -5,6 +5,12 @@ from django.http import HttpResponse
 
 
 def home(request):
-    return HttpResponse('Home Page')
+    return render(request, 'home.html')
 
 
+def users(request):
+    return render(request, 'users.html')
+
+
+def rating(request):
+    return render(request, 'rating.html')
