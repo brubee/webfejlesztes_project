@@ -18,7 +18,19 @@
     </div>
 </nav>
 <body>
-    <div class="container">
+<div class="container">
+    <div class="container" id="forms">
+        <h2>Add Rating</h2>
+        <form method="post">
+            {% csrf_token %}
+            <input type="number" name="userId" placeholder="id of user">
+            <input type="text" name="title" placeholder="movie title">
+            <input type="text" name="opinion" placeholder="my opinion...">
+            <input type="number" name="rating" placeholder="0">
+            <button type="submit" name="createRating">Add Rating</button>
+        </form>
+    </div>
+    <div class="container" id="table">
     <div class="table-responsive">
     <table class="table table-striped">
         <thead>
@@ -31,10 +43,19 @@
             </tr>
         </thead>
         <tbody>
-
+        {% for item in data %}
+            <tr>
+                <td>{{ item.id }}</td>
+                <td>{{ item.user.id }}</td>
+                <td>{{ item.title }}</td>
+                <td>{{ item.opinion }}</td>
+                <td>{{ item.rating }}</td>
+            </tr>
+        {% endfor %}
         </tbody>
     </table>
     </div>
     </div>
+</div>
 </body>
 </html>
