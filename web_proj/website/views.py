@@ -9,11 +9,33 @@ def home(request):
 
 
 def users(request):
+    if request.GET.get('mode'):
+        mode = request.GET['mode']
+    else:
+        mode = 'add'
+
     if request.method == 'POST' and 'createUser' in request.POST:
         User.objects.create(name=request.POST.get('name'), age=request.POST.get('age'),
                             countryOfOrigin=request.POST.get('countryOfOrigin'))
-        return HttpResponseRedirect(reverse("users"))
-    return render(request, 'users.html', {'data': User.objects.all()})
+    if request.method == 'POST' and 'editUser' in request.POST:
+        if User.objects.filter(id=request.POST.get('id')).count() == 0:
+            print("House does not exist")
+            return HttpResponseRedirect(reverse("users"))
+        newName = request.POST.get('name')
+        if newName == '':
+            newName = User.objects.filter(id=request.POST.get('id'))[0].name
+        newAge = request.POST.get('age')
+        if newAge == '':
+            newAge = User.objects.filter(id=request.POST.get('id'))[0].age
+        newCOO = request.POST.get('countryOfOrigin')
+        if newCOO == '':
+            newCOO = User.objects.filter(id=request.POST.get('id'))[0].countryOfOrigin
+        User.objects.filter(id=request.POST.get('id')).update(name=newName, age=newAge, countryOfOrigin=newCOO)
+
+    if request.method == 'POST' and 'deleteUser' in request.POST:
+        User.objects.filter(id=request.POST.get('id')).delete()
+    return render(request, 'users.html', {'data': User.objects.all(),
+                                          'mode': mode})
 
 
 def rating(request):
