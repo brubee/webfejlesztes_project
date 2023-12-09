@@ -6,6 +6,8 @@
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <title>Users</title>
 </head>
 <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
@@ -42,7 +44,7 @@
             <input type="text"  name="name" placeholder="user">
             <input type="number" name="age" placeholder="user age">
             <input type="text" name="countryOfOrigin" placeholder="user country of origin">
-            <button type="submit" name="createUser" class="btn btn-primary">Create User</button>
+            <button type="submit" name="createUser" class="btn btn-secondary">Create User</button>
         </form>
         {% elif mode == 'edit' %}
         <form method="post">
@@ -51,7 +53,7 @@
             <input type="text"  name="name" placeholder="user">
             <input type="number" name="age" placeholder="user age">
             <input type="text" name="countryOfOrigin" placeholder="user country of origin">
-            <button type="submit" name="editUser" class="btn btn-primary">Edit User</button>
+            <button type="submit" name="editUser" class="btn btn-secondary">Edit User</button>
         </form>
         {% endif %}
     </div>

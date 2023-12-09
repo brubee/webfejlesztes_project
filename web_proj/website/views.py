@@ -72,7 +72,7 @@ def rating(request):
             messages.error(request, "The Rating doesn't exist")
             return HttpResponseRedirect(reverse("rating"))
         if request.POST.get('rater') == '' or Rater.objects.filter(id=request.POST.get('rater')).count() == 0:
-            newUser = Rating.objects.filter(id=request.POST.get('id'))[0].user
+            newUser = Rating.objects.filter(id=request.POST.get('id'))[0].rater
         else:
             newUser = Rater.objects.filter(id=request.POST.get('rater'))[0]
         newTitle = request.POST.get('title')
@@ -84,7 +84,7 @@ def rating(request):
         newRating = request.POST.get('rating')
         if newRating == '':
             newRating = Rating.objects.filter(id=request.POST.get('id'))[0].rating
-        Rating.objects.filter(id=request.POST.get('id')).update(user=newUser, title=newTitle, opinion=newOpinion,
+        Rating.objects.filter(id=request.POST.get('id')).update(rater=newUser, title=newTitle, opinion=newOpinion,
                                                                 rating=newRating)
         messages.success(request, "Rating edited successfully")
 

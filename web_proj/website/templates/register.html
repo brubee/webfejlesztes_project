@@ -6,10 +6,12 @@
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <title>Login</title>
 </head>
 <body>
-<div class="container align-middle">
+<div class="container">
     <h2>Registration</h2>
     <p><a href="{% url 'login' %}">Login</a></p>
     <form method="post">

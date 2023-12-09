@@ -6,6 +6,8 @@
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <title>Home Page</title>
 </head>
 <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
@@ -24,6 +26,8 @@
     <h3 class="text-center mt-5">About this website:</h3>
     <h5 class="text-center mt-5">This website (and thus, this project) was created for the Web Development class of 2023/2024.</h5>
     <h5 class="text-center mt-5">The goal of this project was to create a functional, responsive website that allows logged-in users to upload their opinions and ratings about movies they had seen. It was important that there are at least two sites that communicate with each other and a database, along with a proper security system (which here, means the log-in function).</h5>
+    <br>
+    <p class="text-center mt-5">Made by: Jurás Dorka</p>
 </div>
 </body>
 </html>

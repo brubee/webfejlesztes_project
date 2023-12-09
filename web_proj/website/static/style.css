@@ -1,0 +1,40 @@
+body {
+    background-color: floralwhite;
+}
+
+.container {
+    margin: auto;
+    width: 87%;
+    padding: 10px;
+}
+
+#forms, #mode {
+    background-color: cornflowerblue;
+    border: 2px solid grey;
+    padding: 1em;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    text-align: center;
+}
+
+p, h1, h2, h3, h4, h5 {
+    color: royalblue;
+}
+
+.alert-success, .alert-warning, .alert-error{
+    margin-top: 1em;
+    margin-bottom: 0;
+    color: white;
+}
+
+.alert-success{
+    background-color: green;
+}
+
+.alert-warning{
+    background-color: orange;
+}
+
+.alert-error{
+    background-color: red;
+}

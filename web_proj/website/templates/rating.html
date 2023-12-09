@@ -6,6 +6,8 @@
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <title>Ratings</title>
 </head>
 <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
@@ -43,7 +45,7 @@
             <input type="text" name="title" placeholder="movie title">
             <input type="text" name="opinion" placeholder="my opinion...">
             <input type="text" name="rating" step="any" placeholder="0">
-            <button type="submit" name="createRating" class="btn btn-primary">Add Rating</button>
+            <button type="submit" name="createRating" class="btn btn-secondary">Add Rating</button>
         </form>
         {% elif mode == 'edit' %}
         <form method="post">
@@ -53,7 +55,7 @@
             <input type="text" name="title" placeholder="movie title">
             <input type="text" name="opinion" placeholder="my opinion...">
             <input type="text" name="rating" placeholder="rating">
-            <button type="submit" name="editRating" class="btn btn-primary">Edit Rating</button>
+            <button type="submit" name="editRating" class="btn btn-secondary">Edit Rating</button>
         </form>
         {% endif %}
     </div>
