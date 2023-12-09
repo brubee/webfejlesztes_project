@@ -14,6 +14,7 @@
             <a class="navbar-brand" href="{% url 'home' %}">Home</a>
             <a class="navbar-brand" href="{% url 'users' %}">User</a>
             <a class="navbar-brand" href="{% url 'rating' %}">Rating</a>
+            <a class="navbar-brand navbar-right" href="{% url 'logout' %}" id="logout">Logout</a>
         </div>
     </div>
 </nav>
@@ -31,7 +32,7 @@
         {% if mode == 'add' %}
         <form method="post">
             {% csrf_token %}
-            <input type="text" name="user" placeholder="name">
+            <input type="text" name="rater" placeholder="name">
             <input type="text" name="title" placeholder="movie title">
             <input type="text" name="opinion" placeholder="my opinion...">
             <input type="text" name="rating" step="any" placeholder="0">
@@ -41,7 +42,7 @@
         <form method="post">
             {% csrf_token %}
             <input type="text" name="id" placeholder="id">
-            <input type="text" name="user" placeholder="userId">
+            <input type="text" name="rater" placeholder="userId">
             <input type="text" name="title" placeholder="movie title">
             <input type="text" name="opinion" placeholder="my opinion...">
             <input type="text" name="rating" placeholder="rating">
@@ -66,7 +67,7 @@
         {% for item in data %}
             <tr>
                 <td>{{ item.id }}</td>
-                <td>{{ item.user.name }}</td>
+                <td>{{ item.rater.name }}</td>
                 <td>{{ item.title }}</td>
                 <td>{{ item.opinion }}</td>
                 <td>{{ item.rating }}</td>
