@@ -23,6 +23,7 @@ def users(request):
         if request.POST.get('name') == '' or \
                 request.POST.get('age') == '':
             messages.error(request, "Please fill in the necessary information")
+            return HttpResponseRedirect(reverse("users"))
         Rater.objects.create(name=request.POST.get('name'), age=request.POST.get('age'),
                              countryOfOrigin=request.POST.get('countryOfOrigin'))
         messages.success(request, "User created successfully")
@@ -62,6 +63,10 @@ def rating(request):
         if request.POST.get('title') == '' or \
                 request.POST.get('rating') == '':
             messages.error(request, "Please fill in the necessary information")
+            return HttpResponseRedirect(reverse("rating"))
+        if Rater.objects.filter(name=request.POST.get('rater')).count() == 0:
+            messages.error(request, "This User doesn't exist")
+            return HttpResponseRedirect(reverse("rating"))
         Rating.objects.create(rater=Rater.objects.filter(name=request.POST.get('rater'))[0],
                               title=request.POST.get('title'),
                               opinion=request.POST.get('opinion'),
@@ -71,10 +76,10 @@ def rating(request):
         if Rating.objects.filter(id=request.POST.get('id')).count() == 0:
             messages.error(request, "The Rating doesn't exist")
             return HttpResponseRedirect(reverse("rating"))
-        if request.POST.get('rater') == '' or Rater.objects.filter(id=request.POST.get('rater')).count() == 0:
+        if request.POST.get('rater') == '' or Rater.objects.filter(name=request.POST.get('rater')).count() == 0:
             newUser = Rating.objects.filter(id=request.POST.get('id'))[0].rater
         else:
-            newUser = Rater.objects.filter(id=request.POST.get('rater'))[0]
+            newUser = Rater.objects.filter(name=request.POST.get('rater'))[0]
         newTitle = request.POST.get('title')
         if newTitle == '':
             newTitle = Rating.objects.filter(id=request.POST.get('id'))[0].title
