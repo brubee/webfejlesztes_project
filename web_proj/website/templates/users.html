@@ -23,9 +23,9 @@
         <h2>Add User</h2>
         <form method="post">
             {% csrf_token %}
-            <input type="text"  name="user" placeholder="user">
+            <input type="text"  name="name" placeholder="user">
             <input type="number" name="age" placeholder="user age">
-            <input type="text" name="country" placeholder="user country of origin">
+            <input type="text" name="countryOfOrigin" placeholder="user country of origin">
             <button type="submit", name="createUser">Create User</button>
         </form>
     </div>

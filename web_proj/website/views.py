@@ -18,10 +18,7 @@ def users(request):
 
 def rating(request):
     if request.method == 'POST' and 'createRating' in request.POST:
-        if User.objects.filter(id=request.POST.get('user')).count() == 0:
-            print("User doesn't exist")
-            return HttpResponseRedirect(reverse("rating"))
-        Rating.objects.create(userId=User.objects.filter(id=request.POST.get('userId'))[0],
+        Rating.objects.create(user=User.objects.filter(name=request.POST.get('user'))[0],
                               title=request.POST.get('title'),
                               opinion=request.POST.get('opinion'),
                               rating=request.POST.get('rating'))

@@ -23,10 +23,10 @@
         <h2>Add Rating</h2>
         <form method="post">
             {% csrf_token %}
-            <input type="number" name="userId" placeholder="id of user">
+            <input type="text" name="user" placeholder="name">
             <input type="text" name="title" placeholder="movie title">
             <input type="text" name="opinion" placeholder="my opinion...">
-            <input type="number" name="rating" placeholder="0">
+            <input type="text" name="rating" step="any" placeholder="0">
             <button type="submit" name="createRating">Add Rating</button>
         </form>
     </div>
@@ -36,7 +36,7 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>userID</th>
+                <th>User</th>
                 <th>MovieTitle</th>
                 <th>Opinion</th>
                 <th>Rating</th>
@@ -46,7 +46,7 @@
         {% for item in data %}
             <tr>
                 <td>{{ item.id }}</td>
-                <td>{{ item.user.id }}</td>
+                <td>{{ item.user.name }}</td>
                 <td>{{ item.title }}</td>
                 <td>{{ item.opinion }}</td>
                 <td>{{ item.rating }}</td>
