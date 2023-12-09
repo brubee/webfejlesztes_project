@@ -39,15 +39,39 @@ def users(request):
 
 
 def rating(request):
+    if request.GET.get('mode'):
+        mode = request.GET['mode']
+    else:
+        mode = 'add'
+
     if request.method == 'POST' and 'createRating' in request.POST:
         Rating.objects.create(user=User.objects.filter(name=request.POST.get('user'))[0],
                               title=request.POST.get('title'),
                               opinion=request.POST.get('opinion'),
                               rating=request.POST.get('rating'))
-        return HttpResponseRedirect(reverse("rating"))
-    return render(request, 'rating.html', {'data': Rating.objects.all()})
+    if request.method == 'POST' and 'editRating' in request.POST:
+        if Rating.objects.filter(id=request.POST.get('id')).count() == 0:
+            print("Rating doesn't exist")
+            return HttpResponseRedirect(reverse("rating"))
+        if request.POST.get('user') == '' or User.objects.filter(id=request.POST.get('user')).count() == 0:
+            newUser = Rating.objects.filter(id=request.POST.get('id'))[0].user
+        else:
+            newUser = User.objects.filter(id=request.POST.get('user'))[0]
+        newTitle = request.POST.get('title')
+        if newTitle == '':
+            newTitle = Rating.objects.filter(id=request.POST.get('id'))[0].title
+        newOpinion = request.POST.get('opinion')
+        if newOpinion == '':
+            newOpinion = Rating.objects.filter(id=request.POST.get('id'))[0].opinion
+        newRating = request.POST.get('rating')
+        if newRating == '':
+            newRating = Rating.objects.filter(id=request.POST.get('id'))[0].rating
+        Rating.objects.filter(id=request.POST.get('id')).update(user=newUser, title=newTitle, opinion=newOpinion, rating=newRating)
 
-
+    if request.method == 'POST' and 'deleteRating' in request.POST:
+        Rating.objects.filter(id=request.POST.get('id')).delete()
+    return render(request, 'rating.html', {'data': Rating.objects.all(),
+                                           'mode': mode})
 def addUserTest(request):
     User.objects.create(name='Test Name',
                         age=20,

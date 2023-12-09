@@ -34,7 +34,7 @@
             <input type="text"  name="name" placeholder="user">
             <input type="number" name="age" placeholder="user age">
             <input type="text" name="countryOfOrigin" placeholder="user country of origin">
-            <button type="submit" name="createUser">Create User</button>
+            <button type="submit" name="createUser" class="btn btn-primary">Create User</button>
         </form>
         {% elif mode == 'edit' %}
         <form method="post">
@@ -43,7 +43,7 @@
             <input type="text"  name="name" placeholder="user">
             <input type="number" name="age" placeholder="user age">
             <input type="text" name="countryOfOrigin" placeholder="user country of origin">
-            <button type="submit" name="editUser">Edit User</button>
+            <button type="submit" name="editUser" class="btn btn-primary">Edit User</button>
         </form>
         {% endif %}
     </div>
@@ -70,7 +70,7 @@
                     <form method="post">
                         {% csrf_token %}
                         <input type="hidden" value="{{ item.id }}" name="id">
-                        <button type="submit" name="deleteUser">Delete</button>
+                        <button type="submit" name="deleteUser" class="btn btn-dark">Delete</button>
                     </form>
                 </td>
             </tr>

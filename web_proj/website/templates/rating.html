@@ -19,16 +19,35 @@
 </nav>
 <body>
 <div class="container">
+    <div class="container" id="modes">
+        <h2>Ratings</h2>
+        <h3>Select mode of operation</h3>
+        <form method="get">
+            <button type="submit" name="mode" value="add" class="btn btn-secondary">Add Rating</button>
+            <button type="submit" name="mode" value="edit" class="btn btn-secondary">Edit Rating</button>
+        </form>
+    </div>
     <div class="container" id="forms">
-        <h2>Add Rating</h2>
+        {% if mode == 'add' %}
         <form method="post">
             {% csrf_token %}
             <input type="text" name="user" placeholder="name">
             <input type="text" name="title" placeholder="movie title">
             <input type="text" name="opinion" placeholder="my opinion...">
             <input type="text" name="rating" step="any" placeholder="0">
-            <button type="submit" name="createRating">Add Rating</button>
+            <button type="submit" name="createRating" class="btn btn-primary">Add Rating</button>
         </form>
+        {% elif mode == 'edit' %}
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="id" placeholder="id">
+            <input type="text" name="user" placeholder="userId">
+            <input type="text" name="title" placeholder="movie title">
+            <input type="text" name="opinion" placeholder="my opinion...">
+            <input type="text" name="rating" placeholder="rating">
+            <button type="submit" name="editRating" class="btn btn-primary">Edit Rating</button>
+        </form>
+        {% endif %}
     </div>
     <div class="container" id="table">
     <div class="table-responsive">
@@ -40,6 +59,7 @@
                 <th>MovieTitle</th>
                 <th>Opinion</th>
                 <th>Rating</th>
+                <th>Delete Rating</th>
             </tr>
         </thead>
         <tbody>
@@ -50,6 +70,13 @@
                 <td>{{ item.title }}</td>
                 <td>{{ item.opinion }}</td>
                 <td>{{ item.rating }}</td>
+                <td>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{ item.id }}" name="id">
+                        <button type="submit" name="deleteRating"class="btn btn-dark">Delete</button>
+                    </form>
+                </td>
             </tr>
         {% endfor %}
         </tbody>
